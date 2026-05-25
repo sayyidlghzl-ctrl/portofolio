@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Sayyid Ghifari Al Ghozali — Islamic Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CSS VARIABLES & RESET
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --emerald-50:  #ecfdf5;
+  --emerald-100: #d1fae5;
+  --emerald-300: #6ee7b7;
+  --emerald-500: #10b981;
+  --emerald-600: #059669;
+  --emerald-700: #047857;
+  --emerald-900: #064e3b;
+  --emerald-950: #022c22;
+
+  --gold-300: #fcd34d;
+  --gold-400: #fbbf24;
+  --gold-500: #f59e0b;
+  --gold-600: #d97706;
+
+  --dark-900: #040d08;
+  --dark-800: #071a10;
+  --dark-700: #0a2416;
+  --dark-600: #0f3320;
+
+  --glass-bg: rgba(6, 30, 18, 0.55);
+  --glass-border: rgba(16, 185, 129, 0.18);
+  --glass-glow: rgba(16, 185, 129, 0.06);
+
+  --text-primary: #f0fdf8;
+  --text-secondary: #a7f3d0;
+  --text-muted: #6ee7b7;
+
+  --font-display: 'Amiri', serif;
+  --font-arabic: 'Noto Naskh Arabic', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--dark-900);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   LOADING SCREEN
+   ============================================ */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: var(--dark-900);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#loader.hide { opacity: 0; visibility: hidden; }
+
+.loader-crescent {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  animation: crescentSpin 2s linear infinite;
+}
+.loader-crescent svg { width: 100%; height: 100%; }
+
+.loader-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.5rem;
+  color: var(--gold-400);
+  letter-spacing: 0.1em;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.loader-bar {
+  width: 200px;
+  height: 2px;
+  background: rgba(16,185,129,0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.loader-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--emerald-500), var(--gold-400));
+  width: 0%;
+  animation: loadFill 2s ease forwards;
+}
+
+@keyframes crescentSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+@keyframes loadFill { from { width: 0%; } to { width: 100%; } }
+
+/* ============================================
+   STARS & LANTERNS BACKGROUND
+   ============================================ */
+#stars-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.lantern-glow {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+  animation: lanternFloat 8s ease-in-out infinite;
+}
+.lantern-1 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, rgba(16,185,129,0.08) 0%, transparent 70%);
+  top: -50px; right: -50px;
+  animation-delay: 0s;
+}
+.lantern-2 {
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(251,191,36,0.06) 0%, transparent 70%);
+  bottom: 20%; left: -80px;
+  animation-delay: -3s;
+}
+.lantern-3 {
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(16,185,129,0.05) 0%, transparent 70%);
+  top: 50%; right: 10%;
+  animation-delay: -5s;
+}
+@keyframes lanternFloat {
+  0%,100% { transform: translateY(0px) scale(1); opacity: 0.7; }
+  50% { transform: translateY(-30px) scale(1.05); opacity: 1; }
+}
+
+/* ============================================
+   ISLAMIC GEOMETRIC PATTERN (SVG background)
+   ============================================ */
+.geo-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%2310b981' stroke-width='0.5'%3E%3Cpolygon points='60,5 113,32.5 113,87.5 60,115 7,87.5 7,32.5'/%3E%3Cpolygon points='60,20 98,41 98,79 60,100 22,79 22,41'/%3E%3Cline x1='60' y1='5' x2='60' y2='20'/%3E%3Cline x1='113' y1='32.5' x2='98' y2='41'/%3E%3Cline x1='113' y1='87.5' x2='98' y2='79'/%3E%3Cline x1='60' y1='115' x2='60' y2='100'/%3E%3Cline x1='7' y1='87.5' x2='22' y2='79'/%3E%3Cline x1='7' y1='32.5' x2='22' y2='41'/%3E%3Cpolygon points='60,35 80,46.5 80,69.5 60,81 40,69.5 40,46.5' fill='%2310b981' fill-opacity='0.05'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  pointer-events: none;
+}
+
+/* ============================================
+   MASJID SILHOUETTE (FOOTER / HERO BASE)
+   ============================================ */
+.masjid-silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 220px;
+  pointer-events: none;
+  overflow: hidden;
+}
+.masjid-silhouette svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--dark-900);
+}
+
+/* ============================================
+   NAVBAR
+   ============================================ */
+#navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+#navbar.scrolled {
+  background: rgba(4, 13, 8, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 0.75rem 2rem;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+.nav-crescent {
+  width: 32px;
+  height: 32px;
+  color: var(--gold-400);
+}
+.nav-name {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--gold-400);
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.2rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.4rem 0.9rem;
+  border-radius: 100px;
+  transition: var(--transition);
+  letter-spacing: 0.05em;
+}
+.nav-links a:hover, .nav-links a.active {
+  background: rgba(16,185,129,0.12);
+  color: var(--emerald-300);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--glass-border);
+  color: var(--gold-400);
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+/* Mobile nav */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    flex-direction: column;
+    background: rgba(4, 13, 8, 0.97);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 1rem;
+    gap: 0.2rem;
+  }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: block; }
+}
+
+/* ============================================
+   SECTION COMMON
+   ============================================ */
+section { position: relative; padding: 6rem 1.5rem; }
+section > .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+  background: rgba(251,191,36,0.08);
+  border: 1px solid rgba(251,191,36,0.2);
+  padding: 0.3rem 0.9rem;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.section-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  opacity: 0.75;
+  margin-bottom: 3rem;
+}
+
+.ornament-line {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.ornament-line span {
+  display: block;
+  height: 1px;
+  width: 40px;
+  background: linear-gradient(90deg, var(--emerald-500), transparent);
+}
+.ornament-line .diamond {
+  width: 6px; height: 6px;
+  background: var(--gold-400);
+  transform: rotate(45deg);
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.left { transform: translateX(-40px); }
+.reveal.right { transform: translateX(40px); }
+.reveal.visible { opacity: 1; transform: translate(0); }
+
+/* ============================================
+   GLASS CARD
+   ============================================ */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  border-radius: 20px;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 5rem;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(4,120,87,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 20% 70%, rgba(251,191,36,0.05) 0%, transparent 50%),
+    linear-gradient(180deg, var(--dark-900) 0%, var(--dark-800) 50%, var(--dark-900) 100%);
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* Arabic bismillah above */
+.hero-bismillah {
+  text-align: center;
+  grid-column: 1 / -1;
+  font-family: var(--font-arabic);
+  font-size: 1.8rem;
+  color: var(--gold-400);
+  opacity: 0.7;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+  animation: fadeDown 1s 0.5s both;
+}
+
+.hero-content { animation: fadeUp 1s 0.7s both; }
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--emerald-500);
+  margin-bottom: 1.2rem;
+}
+.hero-tag::before, .hero-tag::after {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: var(--emerald-500);
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(135deg, #f0fdf8 30%, var(--emerald-300) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-role {
+  font-size: 1rem;
+  color: var(--gold-400);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.hero-quote-box {
+  padding: 1.2rem 1.5rem;
+  border-left: 3px solid var(--emerald-500);
+  background: rgba(16,185,129,0.06);
+  border-radius: 0 12px 12px 0;
+  margin-bottom: 2rem;
+}
+.hero-quote-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.2rem;
+  color: var(--gold-300);
+  direction: rtl;
+  margin-bottom: 0.4rem;
+}
+.hero-quote-trans {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 2rem;
+  background: linear-gradient(135deg, var(--gold-500), var(--gold-600));
+  color: #0a0a0f;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  border-radius: 100px;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+}
+.btn-gold:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(245,158,11,0.3); }
+
+.btn-outline-em {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 2rem;
+  background: transparent;
+  color: var(--emerald-300);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  border-radius: 100px;
+  border: 1px solid var(--emerald-600);
+  transition: var(--transition);
+  cursor: pointer;
+}
+.btn-outline-em:hover { background: rgba(16,185,129,0.12); transform: translateY(-3px); }
+
+/* HERO PHOTO */
+.hero-photo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  animation: fadeUp 1s 0.9s both;
+}
+
+.photo-frame {
+  position: relative;
+  width: 260px;
+  height: 260px;
+}
+
+.photo-ring-outer {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(16,185,129,0.25);
+  animation: ringRotate 12s linear infinite;
+}
+.photo-ring-outer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  width: 6px; height: 6px;
+  background: var(--gold-400);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px var(--gold-400);
+}
+
+.photo-ring-inner {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px dashed rgba(251,191,36,0.3);
+  animation: ringRotate 8s linear infinite reverse;
+}
+
+.photo-circle {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--emerald-900), var(--dark-600));
+  border: 3px solid var(--emerald-700);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.photo-placeholder {
+  font-size: 6rem;
+  opacity: 0.6;
+}
+
+.photo-tag {
+  font-size: 0.72rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.hero-stat {
+  text-align: center;
+}
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--gold-400);
+  line-height: 1;
+}
+.hero-stat-label {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+@keyframes ringRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ============================================
+   ABOUT SECTION
+   ============================================ */
+#about {
+  background: linear-gradient(180deg, var(--dark-900) 0%, var(--dark-800) 100%);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-card {
+  padding: 2rem;
+}
+
+.about-avatar {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--emerald-700), var(--emerald-900));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  border: 2px solid var(--emerald-600);
+}
+
+.about-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
+  color: var(--gold-400);
+}
+.about-sub {
+  font-size: 0.82rem;
+  color: var(--emerald-300);
+  margin-bottom: 1.5rem;
+}
+
+.bio-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.bio-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.bio-list li .icon {
+  min-width: 20px;
+  color: var(--emerald-500);
+  font-size: 1rem;
+  margin-top: 1px;
+}
+
+.about-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.about-info-card {
+  padding: 1.5rem;
+}
+.info-card-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-400);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hobby-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.hobby-tag {
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  color: var(--emerald-300);
+  background: rgba(16,185,129,0.06);
+  transition: var(--transition);
+}
+.hobby-tag:hover { background: rgba(16,185,129,0.15); border-color: var(--emerald-500); }
+
+.cita-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ============================================
+   SKILLS SECTION
+   ============================================ */
+#skills {
+  background: var(--dark-800);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.skill-item {
+  padding: 1.5rem;
+}
+
+.skill-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.skill-name {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.skill-icon {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  background: rgba(16,185,129,0.12);
+}
+
+.skill-pct {
+  font-family: 'Courier New', monospace;
+  font-size: 0.82rem;
+  color: var(--gold-400);
+  font-weight: 600;
+}
+
+.skill-bar-track {
+  height: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--emerald-600), var(--emerald-400), var(--gold-400));
+  width: 0%;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.skill-bar-fill::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 20px;
+  background: rgba(255,255,255,0.3);
+  filter: blur(4px);
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+@keyframes shimmer { 0%,100% { opacity: 0; } 50% { opacity: 1; } }
+
+/* ============================================
+   PROJECTS SECTION
+   ============================================ */
+#projects {
+  background: var(--dark-900);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  padding: 0;
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.project-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.5); border-color: var(--emerald-600); }
+
+.project-card-top {
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-emoji {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.project-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.project-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.project-tag {
+  font-size: 0.65rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.2);
+  color: var(--emerald-300);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-card-bottom {
+  padding: 0.8rem 2rem;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-link {
+  font-size: 0.75rem;
+  color: var(--gold-400);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: var(--transition);
+}
+.project-link:hover { gap: 0.6rem; }
+
+.project-card-bg {
+  position: absolute;
+  top: -20px; right: -20px;
+  font-size: 5rem;
+  opacity: 0.04;
+  line-height: 1;
+}
+
+/* ============================================
+   GALLERY SECTION
+   ============================================ */
+#gallery {
+  background: var(--dark-800);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.gallery-item {
+  aspect-ratio: 4/3;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: var(--dark-700);
+  border: 1px solid var(--glass-border);
+}
+.gallery-item:first-child {
+  grid-column: span 2;
+  aspect-ratio: 16/9;
+}
+
+.gallery-placeholder {
+  width: 100%; height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--dark-700), var(--dark-600));
+  transition: var(--transition);
+}
+.gallery-item:hover .gallery-placeholder { background: linear-gradient(135deg, var(--dark-600), var(--emerald-950)); }
+
+.gallery-emoji { font-size: 2.5rem; }
+.gallery-label { font-size: 0.72rem; color: var(--text-secondary); letter-spacing: 0.1em; }
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4,120,87,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition);
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay span { color: #fff; font-size: 0.82rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 600; }
+
+/* ============================================
+   PRAYER TIMES SECTION
+   ============================================ */
+#prayer {
+  background: var(--dark-900);
+}
+
+.prayer-card {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2.5rem;
+}
+
+.prayer-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.prayer-date-arabic {
+  font-family: var(--font-arabic);
+  font-size: 1.3rem;
+  color: var(--gold-400);
+  direction: rtl;
+  margin-bottom: 0.3rem;
+}
+
+.prayer-date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+}
+
+.prayer-location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: var(--emerald-300);
+  margin-top: 0.5rem;
+}
+
+.prayer-times {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.prayer-time-item {
+  text-align: center;
+  padding: 1rem 0.5rem;
+  border-radius: 12px;
+  background: rgba(16,185,129,0.05);
+  border: 1px solid var(--glass-border);
+  transition: var(--transition);
+  cursor: default;
+}
+.prayer-time-item.active {
+  background: rgba(16,185,129,0.15);
+  border-color: var(--emerald-500);
+}
+.prayer-time-item.active .prayer-name { color: var(--emerald-300); }
+.prayer-time-item.active .prayer-hour { color: var(--gold-400); }
+
+.prayer-name {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.prayer-hour {
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.prayer-note {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.next-prayer-banner {
+  background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(251,191,36,0.08));
+  border: 1px solid rgba(16,185,129,0.25);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.next-label { font-size: 0.7rem; color: var(--gold-400); letter-spacing: 0.15em; text-transform: uppercase; }
+.next-name { font-family: var(--font-display); font-size: 1.3rem; color: var(--text-primary); }
+.next-countdown { font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--emerald-300); margin-top: 0.2rem; }
+
+/* ============================================
+   ISLAMIC QUOTE SECTION
+   ============================================ */
+#quote {
+  background: linear-gradient(135deg, var(--dark-800) 0%, var(--emerald-950) 50%, var(--dark-800) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-center {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.quote-ornament {
+  font-family: var(--font-arabic);
+  font-size: 3rem;
+  color: var(--gold-400);
+  opacity: 0.25;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.quote-arabic-big {
+  font-family: var(--font-arabic);
+  font-size: 2.2rem;
+  color: var(--gold-300);
+  direction: rtl;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.quote-surah {
+  font-size: 0.78rem;
+  color: var(--emerald-400);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.quote-translation {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   CONTACT SECTION
+   ============================================ */
+#contact {
+  background: var(--dark-900);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.contact-info .contact-intro {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.contact-link-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.2rem;
+  text-decoration: none;
+  transition: var(--transition);
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: rgba(16,185,129,0.03);
+}
+.contact-link-item:hover {
+  background: rgba(16,185,129,0.1);
+  border-color: var(--emerald-600);
+  transform: translateX(6px);
+}
+
+.contact-icon {
+  width: 40px; height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.icon-wa { background: rgba(37,211,102,0.15); }
+.icon-ig { background: rgba(225,48,108,0.15); }
+.icon-em { background: rgba(251,191,36,0.15); }
+
+.contact-link-text { display: flex; flex-direction: column; }
+.contact-link-platform { font-size: 0.7rem; color: var(--text-secondary); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+.contact-link-value { font-size: 0.88rem; color: var(--text-primary); }
+
+.contact-form-card {
+  padding: 2rem;
+}
+.form-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--gold-400);
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+.form-group input, .form-group textarea {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  outline: none;
+  transition: var(--transition);
+}
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--emerald-500);
+  background: rgba(16,185,129,0.04);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  background: var(--dark-900);
+  border-top: 1px solid var(--glass-border);
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 1.5rem 2rem;
+}
+
+.footer-masjid {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 160px;
+  opacity: 0.06;
+  overflow: hidden;
+}
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.footer-logo {
+  font-family: var(--font-arabic);
+  font-size: 2rem;
+  color: var(--gold-400);
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+
+.footer-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.3rem;
+}
+
+.footer-tagline {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  margin-bottom: 1.5rem;
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  list-style: none;
+  margin-bottom: 2rem;
+}
+.footer-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.78rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+  transition: var(--transition);
+  opacity: 0.7;
+}
+.footer-nav a:hover { opacity: 1; color: var(--gold-400); }
+
+.footer-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--emerald-500), transparent);
+  margin: 0 auto 1.5rem;
+}
+
+.footer-bottom {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  opacity: 0.4;
+  letter-spacing: 0.08em;
+}
+
+.footer-arabic-quote {
+  font-family: var(--font-arabic);
+  font-size: 1.1rem;
+  color: var(--gold-400);
+  opacity: 0.4;
+  direction: rtl;
+  margin-bottom: 0.3rem;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; text-align: center; }
+  .hero-bismillah { margin-bottom: 0; }
+  .hero-tag { justify-content: center; }
+  .hero-cta { justify-content: center; }
+  .hero-photo-area { order: -1; }
+  .about-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-item:first-child { grid-column: span 2; }
+  .prayer-times { grid-template-columns: repeat(3, 1fr); }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  section { padding: 4rem 1rem; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item:first-child { grid-column: span 1; }
+  .prayer-times { grid-template-columns: repeat(2, 1fr); }
+  .photo-frame, .photo-circle { width: 200px; height: 200px; }
+}
+
+/* ============================================
+   SCROLL BAR
+   ============================================ */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--dark-900); }
+::-webkit-scrollbar-thumb { background: var(--emerald-700); border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: var(--emerald-500); }
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="loader">
+  <div class="loader-crescent">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="cg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fbbf24"/>
+          <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.6"/>
+        </radialGradient>
+      </defs>
+      <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(16,185,129,0.15)" stroke-width="2"/>
+      <circle cx="50" cy="50" r="42" fill="none" stroke="url(#cg)" stroke-width="2"
+        stroke-dasharray="80 184" stroke-linecap="round"
+        style="transform-origin:50px 50px; animation: crescentSpin 1.5s linear infinite"/>
+      <path d="M 50 15 A 35 35 0 1 1 35 78 A 27 27 0 1 0 50 15 Z" fill="#fbbf24" opacity="0.85"/>
+      <circle cx="72" cy="28" r="3" fill="#fbbf24" opacity="0.7"/>
+    </svg>
+  </div>
+  <div class="loader-arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- BACKGROUND EFFECTS -->
+<canvas id="stars-canvas"></canvas>
+<div class="lantern-glow lantern-1"></div>
+<div class="lantern-glow lantern-2"></div>
+<div class="lantern-glow lantern-3"></div>
+
+<!-- ======== NAVBAR ======== -->
+<nav id="navbar">
+  <a href="#hero" class="nav-brand">
+    <svg class="nav-crescent" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 8 A12 12 0 1 1 10 28 A9 9 0 1 0 20 8 Z" fill="currentColor" opacity="0.9"/>
+      <circle cx="30" cy="12" r="2.5" fill="currentColor" opacity="0.6"/>
+      <circle cx="34" cy="18" r="1.5" fill="currentColor" opacity="0.4"/>
+    </svg>
+    <span class="nav-name">MSG Al Ghozali</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#skills">Skill</a></li>
+    <li><a href="#projects">Proyek</a></li>
+    <li><a href="#gallery">Galeri</a></li>
+    <li><a href="#prayer">Sholat</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+</nav>
+
+<!-- ======== HERO ======== -->
+<section id="hero">
+  <div class="geo-pattern"></div>
+  <div class="hero-bg"></div>
+  <div class="container">
+    <p class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+    <div class="hero-inner">
+
+      <!-- LEFT: CONTENT -->
+      <div class="hero-content">
+        <div class="hero-tag">Muslim · Programmer · Creator</div>
+        <h1 class="hero-name">Muhammad Sayyid<br>Ghifari Al Ghozali</h1>
+        <p class="hero-role">✦ Web Developer &amp; Designer Muda</p>
+        <div class="hero-quote-box">
+          <div class="hero-quote-arabic">وَأَن لَّيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ</div>
+          <p class="hero-quote-trans">"Dan bahwa manusia hanya memperoleh apa yang telah diusahakannya." — QS. An-Najm: 39</p>
+        </div>
+        <div class="hero-cta">
+          <a href="#about" class="btn-gold">Tentang Saya ↓</a>
+          <a href="#contact" class="btn-outline-em">Hubungi Saya</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: PHOTO -->
+      <div class="hero-photo-area">
+        <div class="photo-frame">
+          <div class="photo-ring-outer"></div>
+          <div class="photo-ring-inner"></div>
+          <div class="photo-circle">
+            <!-- Ganti dengan: <img src="foto.jpg" style="width:100%;height:100%;object-fit:cover"> -->
+            <span class="photo-placeholder">🧑‍💻</span>
+          </div>
+        </div>
+        <p class="photo-tag">📌 Ganti dengan foto profilmu</p>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">3+</div>
+            <div class="hero-stat-label">Tahun Belajar</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">15+</div>
+            <div class="hero-stat-label">Proyek</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">100%</div>
+            <div class="hero-stat-label">Dedikasi</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======== ABOUT ======== -->
+<section id="about">
+  <div class="container">
+    <div class="reveal">
+      <span class="section-badge">✦ Biodata</span>
+      <h2 class="section-title">Tentang Saya</h2>
+      <p class="section-subtitle">Mengenal lebih dekat siapa saya</p>
+    </div>
+    <div class="about-grid">
+      <!-- LEFT CARD -->
+      <div class="glass about-card reveal left">
+        <div class="about-avatar">🧑</div>
+        <div class="about-name">Ghifari Al Ghozali</div>
+        <div class="about-sub">Pelajar · Programmer · Muslim</div>
+        <ul class="bio-list">
+          <li><span class="icon">📅</span><span><strong>Nama Lengkap:</strong> Muhammad Sayyid Ghifari Al Ghozali</span></li>
+          <li><span class="icon">📍</span><span><strong>Asal:</strong> Indonesia</span></li>
+          <li><span class="icon">🏫</span><span><strong>Sekolah:</strong> [Nama Sekolah/Universitas kamu]</span></li>
+          <li><span class="icon">📚</span><span><strong>Jurusan:</strong> [Jurusan kamu]</span></li>
+          <li><span class="icon">☪️</span><span><strong>Agama:</strong> Islam — dengan bangga</span></li>
+          <li><span class="icon">🌍</span><span><strong>Bahasa:</strong> Indonesia, Inggris</span></li>
+        </ul>
+      </div>
+      <!-- RIGHT CARDS -->
+      <div class="about-right">
+        <div class="glass about-info-card reveal right" style="transition-delay:0.1s">
+          <div class="info-card-title">🎯 Cita-Cita</div>
+          <p class="cita-text">
+            "Menjadi seorang software engineer yang tidak hanya mahir secara teknis, tetapi juga membawa manfaat nyata bagi umat — membangun teknologi dengan nilai-nilai Islam yang mulia."
+          </p>
+        </div>
+        <div class="glass about-info-card reveal right" style="transition-delay:0.2s">
+          <div class="info-card-title">🎮 Hobi & Minat</div>
+          <div class="hobby-tags">
+            <span class="hobby-tag">💻 Coding</span>
+            <span class="hobby-tag">📖 Membaca</span>
+            <span class="hobby-tag">🎨 Design</span>
+            <span class="hobby-tag">⚽ Olahraga</span>
+            <span class="hobby-tag">🎵 Nasyid</span>
+            <span class="hobby-tag">🕌 Kajian Islam</span>
+            <span class="hobby-tag">📸 Fotografi</span>
+            <span class="hobby-tag">🌙 Tahajud</span>
+          </div>
+        </div>
+        <div class="glass about-info-card reveal right" style="transition-delay:0.3s">
+          <div class="info-card-title">✨ Kepribadian</div>
+          <div class="hobby-tags">
+            <span class="hobby-tag">Kreatif</span>
+            <span class="hobby-tag">Teliti</span>
+            <span class="hobby-tag">Disiplin</span>
+            <span class="hobby-tag">Berani Belajar</span>
+            <span class="hobby-tag">Kolaboratif</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== SKILLS ======== -->
+<section id="skills">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <span class="section-badge">✦ Kemampuan</span>
+      <h2 class="section-title">Skills & Teknologi</h2>
+      <p class="section-subtitle">Yang sedang aku pelajari dan kuasai</p>
+    </div>
+    <div class="skills-grid">
+
+      <div class="glass skill-item reveal" data-delay="0">
+        <div class="skill-header">
+          <div class="skill-name"><div class="skill-icon">🌐</div> HTML5</div>
+          <span class="skill-pct">85%</span>
+        </div>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" data-width="85"></div>
+        </div>
+      </div>
+
+      <div class="glass skill-item reveal" data-delay="1">
+        <div class="skill-header">
+          <div class="skill-name"><div class="skill-icon">🎨</div> CSS3</div>
+          <span class="skill-pct">80%</span>
+        </div>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" data-width="80"></div>
+        </div>
+      </div>
+
+      <div class="glass skill-item reveal" data-delay="2">
+        <div class="skill-header">
+          <div class="skill-name"><div class="skill-icon">⚡</div> JavaScript</div>
+          <span class="skill-pct">70%</span>
+        </div>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" data-width="70"></div>
+        </div>
+      </div>
+
+      <div class="glass skill-item reveal" data-delay="3">
+        <div class="skill-header">
+          <div class="skill-name"><div class="skill-icon">⚙️</div> C++</div>
+          <span class="skill-pct">60%</span>
+        </div>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" data-width="60"></div>
+        </div>
+      </div>
+
+      <div class="glass skill-item reveal" data-delay="4">
+        <div class="skill-header">
+          <div class="skill-name"><div class="skill-icon">🐍</div> Python</div>
+          <span class="skill-pct">55%</span>
+        </div>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" data-width="55"></div>
+        </div>
+      </div>
+
+      <div class="glass skill-item reveal" data-delay="5">
+        <div class="skill-header">
+          <div class="skill-name"><div class="skill-icon">🎭</div> UI/UX Design</div>
+          <span class="skill-pct">65%</span>
+        </div>
+        <div class="skill-bar-track">
+          <div class="skill-bar-fill" data-width="65"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======== PROJECTS ======== -->
+<section id="projects">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <span class="section-badge">✦ Karya</span>
+      <h2 class="section-title">Proyek Saya</h2>
+      <p class="section-subtitle">Kumpulan proyek yang pernah aku kerjakan</p>
+    </div>
+    <div class="projects-grid">
+
+      <div class="glass project-card reveal">
+        <div class="project-card-top">
+          <div class="project-card-bg">🌐</div>
+          <span class="project-emoji">🌐</span>
+          <h3 class="project-title">Website Portofolio Islami</h3>
+          <p class="project-desc">Website portofolio pribadi bertema Islamic modern dengan animasi halus, glassmorphism, dan fitur jadwal sholat digital.</p>
+          <div class="project-tags">
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="project-card-bottom">
+          <a href="#" class="project-link">Lihat Proyek →</a>
+          <span style="font-size:0.72rem;color:var(--text-secondary);opacity:0.5">2024</span>
+        </div>
+      </div>
+
+      <div class="glass project-card reveal" style="transition-delay:0.1s">
+        <div class="project-card-top">
+          <div class="project-card-bg">🕌</div>
+          <span class="project-emoji">🕌</span>
+          <h3 class="project-title">Aplikasi Jadwal Sholat</h3>
+          <p class="project-desc">Aplikasi web ringan untuk menampilkan jadwal sholat berdasarkan lokasi pengguna dengan tampilan yang clean dan Islami.</p>
+          <div class="project-tags">
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">API</span>
+            <span class="project-tag">CSS</span>
+          </div>
+        </div>
+        <div class="project-card-bottom">
+          <a href="#" class="project-link">Lihat Proyek →</a>
+          <span style="font-size:0.72rem;color:var(--text-secondary);opacity:0.5">2024</span>
+        </div>
+      </div>
+
+      <div class="glass project-card reveal" style="transition-delay:0.2s">
+        <div class="project-card-top">
+          <div class="project-card-bg">🎮</div>
+          <span class="project-emoji">🎮</span>
+          <h3 class="project-title">Mini Game Quiz Islami</h3>
+          <p class="project-desc">Game kuis interaktif seputar pengetahuan Islam yang dibuat menggunakan JavaScript vanilla murni dengan sistem skor.</p>
+          <div class="project-tags">
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">Game</span>
+          </div>
+        </div>
+        <div class="project-card-bottom">
+          <a href="#" class="project-link">Lihat Proyek →</a>
+          <span style="font-size:0.72rem;color:var(--text-secondary);opacity:0.5">2023</span>
+        </div>
+      </div>
+
+      <div class="glass project-card reveal" style="transition-delay:0.3s">
+        <div class="project-card-top">
+          <div class="project-card-bg">📊</div>
+          <span class="project-emoji">📊</span>
+          <h3 class="project-title">Sistem Manajemen Sekolah</h3>
+          <p class="project-desc">Sistem CRUD sederhana untuk manajemen data siswa dan nilai menggunakan C++ dengan antarmuka berbasis terminal.</p>
+          <div class="project-tags">
+            <span class="project-tag">C++</span>
+            <span class="project-tag">OOP</span>
+            <span class="project-tag">CRUD</span>
+          </div>
+        </div>
+        <div class="project-card-bottom">
+          <a href="#" class="project-link">Lihat Proyek →</a>
+          <span style="font-size:0.72rem;color:var(--text-secondary);opacity:0.5">2023</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======== GALLERY ======== -->
+<section id="gallery">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <span class="section-badge">✦ Galeri</span>
+      <h2 class="section-title">Galeri Proyek</h2>
+      <p class="section-subtitle">Screenshot dan foto karya-karya terbaik</p>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-emoji">🖼️</span>
+          <span class="gallery-label">Screenshot Proyek Utama</span>
+        </div>
+        <div class="gallery-overlay"><span>Lihat Detail</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-emoji">📱</span>
+          <span class="gallery-label">Mobile Design</span>
+        </div>
+        <div class="gallery-overlay"><span>Lihat Detail</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-emoji">💻</span>
+          <span class="gallery-label">UI Dashboard</span>
+        </div>
+        <div class="gallery-overlay"><span>Lihat Detail</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-emoji">🎨</span>
+          <span class="gallery-label">Design Mockup</span>
+        </div>
+        <div class="gallery-overlay"><span>Lihat Detail</span></div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-placeholder">
+          <span class="gallery-emoji">⌨️</span>
+          <span class="gallery-label">Coding Session</span>
+        </div>
+        <div class="gallery-overlay"><span>Lihat Detail</span></div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:1.5rem;font-size:0.78rem;color:var(--text-secondary);opacity:0.5">
+      💡 Ganti placeholder dengan screenshot proyek aslimu menggunakan tag &lt;img&gt;
+    </p>
+  </div>
+</section>
+
+<!-- ======== PRAYER TIMES ======== -->
+<section id="prayer">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <span class="section-badge">☪️ Ibadah</span>
+      <h2 class="section-title">Jadwal Sholat</h2>
+      <p class="section-subtitle">Waktu sholat hari ini — izin sebentar, panggilan-Nya lebih utama</p>
+    </div>
+    <div class="glass prayer-card reveal">
+      <div class="prayer-header">
+        <div class="prayer-date-arabic" id="hijriDate">جُمَادَى الأُولَى ١٤٤٦</div>
+        <div class="prayer-date" id="gregDate">Memuat tanggal...</div>
+        <div class="prayer-location">📍 <span id="locationText">Mendeteksi lokasi...</span></div>
+      </div>
+      <div class="next-prayer-banner">
+        <div class="next-label">Sholat Berikutnya</div>
+        <div class="next-name" id="nextPrayerName">—</div>
+        <div class="next-countdown" id="nextCountdown">Memuat...</div>
+      </div>
+      <div class="prayer-times" id="prayerTimes">
+        <div class="prayer-time-item" id="pt-fajr">
+          <div class="prayer-name">Subuh</div>
+          <div class="prayer-hour" id="fajr-time">—:—</div>
+        </div>
+        <div class="prayer-time-item" id="pt-dhuhr">
+          <div class="prayer-name">Dzuhur</div>
+          <div class="prayer-hour" id="dhuhr-time">—:—</div>
+        </div>
+        <div class="prayer-time-item" id="pt-asr">
+          <div class="prayer-name">Ashar</div>
+          <div class="prayer-hour" id="asr-time">—:—</div>
+        </div>
+        <div class="prayer-time-item" id="pt-maghrib">
+          <div class="prayer-name">Maghrib</div>
+          <div class="prayer-hour" id="maghrib-time">—:—</div>
+        </div>
+        <div class="prayer-time-item" id="pt-isha">
+          <div class="prayer-name">Isya</div>
+          <div class="prayer-hour" id="isha-time">—:—</div>
+        </div>
+        <div class="prayer-time-item" id="pt-sunrise">
+          <div class="prayer-name">Syuruq</div>
+          <div class="prayer-hour" id="sunrise-time">—:—</div>
+        </div>
+      </div>
+      <div class="prayer-note" id="prayerNote">🕌 Waktu berdasarkan lokasi & Kemenag Indonesia</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== QUOTE ======== -->
+<section id="quote">
+  <div class="geo-pattern"></div>
+  <div class="container">
+    <div class="quote-center reveal">
+      <div class="quote-ornament">﷽</div>
+      <div class="quote-arabic-big">
+        إِنَّ مَعَ الْعُسْرِ يُسْرًا
+      </div>
+      <div class="quote-surah">QS. Al-Insyirah: 6</div>
+      <p class="quote-translation">
+        "Sesungguhnya bersama kesulitan ada kemudahan."<br>
+        — Setiap baris kode yang sulit adalah jalan menuju kemampuan yang lebih besar.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ======== CONTACT ======== -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal" style="text-align:center">
+      <span class="section-badge">✦ Kontak</span>
+      <h2 class="section-title">Hubungi Saya</h2>
+      <p class="section-subtitle">Yuk diskusi, kolaborasi, atau sekadar sapa!</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal left">
+        <p class="contact-intro">
+          Saya terbuka untuk kolaborasi proyek, diskusi teknologi, pertanyaan seputar Islam dan coding, atau sekadar berkenalan. <em>In syaa Allah</em> saya akan membalas pesan kamu. 😊
+        </p>
+        <div class="contact-links">
+          <a href="https://wa.me/62XXXXXXXXXX" class="contact-link-item" target="_blank">
+            <div class="contact-icon icon-wa">💬</div>
+            <div class="contact-link-text">
+              <span class="contact-link-platform">WhatsApp</span>
+              <span class="contact-link-value">+62 8XX-XXXX-XXXX</span>
+            </div>
+          </a>
+          <a href="https://instagram.com/username" class="contact-link-item" target="_blank">
+            <div class="contact-icon icon-ig">📸</div>
+            <div class="contact-link-text">
+              <span class="contact-link-platform">Instagram</span>
+              <span class="contact-link-value">@username_kamu</span>
+            </div>
+          </a>
+          <a href="mailto:email@kamu.com" class="contact-link-item">
+            <div class="contact-icon icon-em">✉️</div>
+            <div class="contact-link-text">
+              <span class="contact-link-platform">Email</span>
+              <span class="contact-link-value">email@kamu.com</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="glass contact-form-card reveal right">
+        <div class="form-title">Kirim Pesan 📨</div>
+        <div class="form-group">
+          <label>Nama Kamu</label>
+          <input type="text" placeholder="Muhammad ...">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="email@contoh.com">
+        </div>
+        <div class="form-group">
+          <label>Pesan</label>
+          <textarea placeholder="As-salamu'alaikum, aku ingin..."></textarea>
+        </div>
+        <button class="btn-gold" style="width:100%;justify-content:center" onclick="alert('Jazakallah khairan! Pesan terkirim 🌙')">
+          Kirim Pesan ✉️
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======== FOOTER ======== -->
+<footer>
+  <!-- Masjid SVG Silhouette -->
+  <div class="footer-masjid">
+    <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path fill="#10b981" d="
+        M0,160 L0,120
+        L80,120 L80,80 L100,60 L120,80 L120,120
+        L180,120 L180,100
+        L220,100 L220,60 L240,40 L260,20 L280,40 L300,60 L300,100
+        L340,100 L340,120
+        L400,120 L400,90 L420,70 L440,90 L440,120
+        L520,120 L520,80
+        L560,80 L560,50 L580,30 L600,10 L620,30 L640,50 L640,80
+        L680,80 L680,120
+        L760,120 L760,100 L780,80 L800,100 L800,120
+        L860,120 L860,80
+        L900,80 L900,50 L920,30 L940,10 L960,30 L980,50 L980,80
+        L1020,80 L1020,120
+        L1100,120 L1100,90 L1120,70 L1140,90 L1140,120
+        L1220,120 L1220,80 L1240,60 L1260,80 L1260,120
+        L1340,120 L1340,80 L1360,60 L1380,80 L1380,120
+        L1440,120 L1440,160 Z
+      "/>
+    </svg>
+  </div>
+
+  <div class="footer-inner">
+    <div class="footer-logo">☪</div>
+    <div class="footer-name">Muhammad Sayyid Ghifari Al Ghozali</div>
+    <div class="footer-tagline">Muslim · Programmer · Lifelong Learner</div>
+    <ul class="footer-nav">
+      <li><a href="#hero">Beranda</a></li>
+      <li><a href="#about">Tentang</a></li>
+      <li><a href="#skills">Skill</a></li>
+      <li><a href="#projects">Proyek</a></li>
+      <li><a href="#gallery">Galeri</a></li>
+      <li><a href="#prayer">Sholat</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+    <div class="footer-divider"></div>
+    <div class="footer-arabic-quote">جَزَاكُمُ اللَّهُ خَيْرًا</div>
+    <div class="footer-bottom">
+      © 2025 Ghifari Al Ghozali — Dibuat dengan ❤️ dan Bismillah
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+// ---- LOADING SCREEN ----
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+  }, 2200);
+});
+
+// ---- STARS CANVAS ----
+(function() {
+  const canvas = document.getElementById('stars-canvas');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  let W, H;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function createStars() {
+    stars = [];
+    for (let i = 0; i < 120; i++) {
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.5 + 0.3,
+        a: Math.random(),
+        speed: Math.random() * 0.008 + 0.003,
+        offset: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    stars.forEach(s => {
+      const alpha = (Math.sin(t * s.speed + s.offset) + 1) / 2 * 0.7 + 0.1;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${Math.random() > 0.8 ? '251,191,36' : '110,231,183'},${alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  createStars();
+  window.addEventListener('resize', () => { resize(); createStars(); });
+  requestAnimationFrame(draw);
+})();
+
+// ---- NAVBAR ----
+const navbar = document.getElementById('navbar');
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+// Close mobile nav on link click
+navLinks.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => navLinks.classList.remove('open'));
+});
+
+// Active nav highlight
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+// ---- SCROLL REVEAL ----
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const delay = (e.target.dataset.delay || 0) * 120;
+      setTimeout(() => e.target.classList.add('visible'), delay);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+// ---- SKILL BARS ----
+const skillObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('#skills').forEach(el => skillObs.observe(el));
+
+// ---- PRAYER TIMES ----
+(function() {
+  const prayerKeys = ['fajr','sunrise','dhuhr','asr','maghrib','isha'];
+  const prayerIds  = ['pt-fajr','pt-sunrise','pt-dhuhr','pt-asr','pt-maghrib','pt-isha'];
+  const timeIds    = ['fajr-time','sunrise-time','dhuhr-time','asr-time','maghrib-time','isha-time'];
+  const prayerLabels = ['Subuh','Syuruq','Dzuhur','Ashar','Maghrib','Isya'];
+
+  // Simple prayer time calculator (simplified Karachi method)
+  function toRad(d) { return d * Math.PI / 180; }
+  function toDeg(r) { return r * 180 / Math.PI; }
+
+  function calcPrayerTimes(lat, lng, date, tz) {
+    const yr = date.getFullYear(), mo = date.getMonth()+1, dy = date.getDate();
+    const JD = 367*yr - Math.floor(7*(yr+Math.floor((mo+9)/12))/4) + Math.floor(275*mo/9) + dy + 1721013.5 + tz/24;
+    const D = JD - 2451545.0;
+    const g = 357.529 + 0.98560028*D;
+    const q = 280.459 + 0.98564736*D;
+    const L = q + 1.915*Math.sin(toRad(g)) + 0.020*Math.sin(toRad(2*g));
+    const e = 23.439 - 0.00000036*D;
+    const RA = toDeg(Math.atan2(Math.cos(toRad(e))*Math.sin(toRad(L)), Math.cos(toRad(L))))/15;
+    const Dec = toDeg(Math.asin(Math.sin(toRad(e))*Math.sin(toRad(L))));
+    const EqT = q/15 - RA;
+    const Dhuhr = 12 + tz - lng/15 - EqT;
+
+    function hourAngle(angle, rise) {
+      const cos_h = (Math.sin(toRad(angle)) - Math.sin(toRad(lat))*Math.sin(toRad(Dec))) /
+                    (Math.cos(toRad(lat)) * Math.cos(toRad(Dec)));
+      if (Math.abs(cos_h) > 1) return null;
+      const h = toDeg(Math.acos(cos_h)) / 15;
+      return rise ? Dhuhr - h : Dhuhr + h;
+    }
+
+    function shadowAngle(s) {
+      return toDeg(Math.atan(1/(s + Math.tan(toRad(Math.abs(lat - Dec))))));
+    }
+
+    const Fajr    = hourAngle(-18, true);
+    const Sunrise = hourAngle(-0.833, true);
+    const Asr     = hourAngle(-shadowAngle(1), false);
+    const Maghrib = hourAngle(-0.833, false);
+    const Isha    = hourAngle(-17, false);
+
+    return { fajr: Fajr, sunrise: Sunrise, dhuhr: Dhuhr, asr: Asr, maghrib: Maghrib, isha: Isha };
+  }
+
+  function fmtTime(t) {
+    if (t === null) return '--:--';
+    let h = Math.floor(t) % 24;
+    const m = Math.round((t - Math.floor(t)) * 60);
+    if (m === 60) { h = (h+1)%24; }
+    const mm = m === 60 ? 0 : m;
+    return `${String((h+24)%24).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
+  }
+
+  function timeToMinutes(str) {
+    const [h,m] = str.split(':').map(Number);
+    return h*60 + m;
+  }
+
+  function updateDate() {
+    const now = new Date();
+    const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric' };
+    document.getElementById('gregDate').textContent = now.toLocaleDateString('id-ID', opts);
+  }
+
+  function updatePrayer(times, labels) {
+    const now = new Date();
+    const curMin = now.getHours()*60 + now.getMinutes();
+
+    let nextIdx = -1;
+    for (let i = 0; i < labels.length; i++) {
+      const t = timeToMinutes(labels[i]);
+      if (t > curMin) { nextIdx = i; break; }
+    }
+    if (nextIdx === -1) nextIdx = 0; // next is fajr tomorrow
+
+    prayerIds.forEach((pid, i) => {
+      document.getElementById(pid).classList.toggle('active', i === nextIdx);
+    });
+
+    const nextName = prayerLabels[nextIdx];
+    const nextTime = timeToMinutes(labels[nextIdx]);
+    let diff = nextTime - curMin;
+    if (diff < 0) diff += 24*60;
+    const hh = Math.floor(diff/60), mm = diff%60;
+    document.getElementById('nextPrayerName').textContent = nextName;
+    document.getElementById('nextCountdown').textContent = `${hh > 0 ? hh+'j ' : ''}${mm} menit lagi`;
+  }
+
+  function init(lat, lng) {
+    const now = new Date();
+    const tz = -now.getTimezoneOffset()/60;
+    const times = calcPrayerTimes(lat, lng, now, tz);
+    const labels = [fmtTime(times.fajr), fmtTime(times.sunrise), fmtTime(times.dhuhr),
+                    fmtTime(times.asr),  fmtTime(times.maghrib), fmtTime(times.isha)];
+
+    timeIds.forEach((id, i) => {
+      document.getElementById(id).textContent = labels[i];
+    });
+    updatePrayer(times, labels);
+    setInterval(() => updatePrayer(times, labels), 30000);
+  }
+
+  updateDate();
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        document.getElementById('locationText').textContent = `${pos.coords.latitude.toFixed(2)}°N, ${pos.coords.longitude.toFixed(2)}°E`;
+        init(pos.coords.latitude, pos.coords.longitude);
+      },
+      () => {
+        // Default: Jakarta
+        document.getElementById('locationText').textContent = 'Jakarta (default)';
+        document.getElementById('prayerNote').textContent = '🕌 Aktifkan lokasi untuk waktu akurat';
+        init(-6.2088, 106.8456);
+      }
+    );
+  } else {
+    init(-6.2088, 106.8456);
+  }
+})();
+
+// ---- SMOOTH ACTIVE ON CLICK ----
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
